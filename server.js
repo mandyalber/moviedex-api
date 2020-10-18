@@ -39,15 +39,12 @@ app.get('/movies/', function handleGetMovies(req, res){
     //When searching by average vote, users are searching for Movies with an avg_vote that is greater than or equal to the supplied number.
     //When comparing two numeric strings for greater than or less than, we can "cast" the strings to numbers like so: Number('1') === 1
     if(req.query.avg_vote){
-        
+        response = response.filter(movie => 
+            Number(movie.avg_vote) >= Number(req.query.avg_vote))
     }
     res.json(response)
 })
 
-/*  The API responds with an array of full movie entries for the search results
-
-    The endpoint only responds when given a valid Authorization header with a Bearer API token value.
-*/
 const PORT = 8000
 
 app.listen(PORT, () => {
